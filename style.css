@@ -6,9 +6,8 @@
 }
 
 body {
-    background-image: url(https://i.pinimg.com/564x/5b/ba/a8/5bbaa8f386181f15d3b75552f6a0df8d.jpg);
-    
-    
+    background: rgb(72,88,111);
+    background: radial-gradient(circle, rgba(72,88,111,1) 0%, rgba(40,55,77,1) 100%);
 }
 
 .container {
@@ -37,11 +36,7 @@ body {
     text-align: center;
     justify-content: center;
     position: relative;
-    
 
-    & h2 {
-        
-    }
     & p {
         margin: 10px 10px;
         
