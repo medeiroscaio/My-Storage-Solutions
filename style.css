@@ -1,0 +1,132 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'ubuntu', sans-serif;
+}
+
+body {
+    background-image: url(https://i.pinimg.com/564x/5b/ba/a8/5bbaa8f386181f15d3b75552f6a0df8d.jpg);
+    
+    
+}
+
+.container {
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.center-content {
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px 10px#0000003d;
+}
+
+.esquerda {
+    background-color: #28374d;
+    border-radius: 10px 0 0 10px;
+    width: 40%;
+    
+    color: white;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    position: relative;
+    
+
+    & h2 {
+        
+    }
+    & p {
+        margin: 10px 10px;
+        
+    }
+
+    & .logo {
+        position: absolute;
+        top: 0;
+        display: flex;
+        align-items: center;
+        margin-top: 10px;
+
+        & img {
+        width: 80px;
+        }
+        & p {
+            font-style: italic;
+        }
+    }
+}
+
+.card-login {
+    background-color: #48586F;
+    border-radius: 0 10px 10px 0;
+    width: 60%;
+    
+    & h1 {
+        margin-top: 40px;
+        text-align: center;
+        color: white;
+    }
+
+    & form {
+        width: 70%;
+        margin: 50px auto 0;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        
+        & label {
+            box-shadow: 3px 3px 7px 0px#0000003d;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+
+            & .icon {
+                background-color: rgba(255, 255, 255, 0.123);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 10px 0 0 10px;
+                width: 60px;
+                height: 50px;
+                & i {
+                    font-size: 30px;
+                    color: white;
+                }
+            }
+        }
+        & input {
+            background-color: #28374d;
+            width: 100%;
+            height: 50px;
+            border-radius: 0 10px 10px 0;
+            border: 0;
+            outline: none;
+            text-indent: 7px;
+            caret-color: white;
+            color: white;
+        }
+        & button {
+            background-color: #6cbd7d;
+            color: white;
+            font-size: 20px;
+            border: 0;
+            border-radius: 10px;
+            width: 100%;
+            height: 50px;
+            margin-bottom: 40px;
+            box-shadow: 3px 3px 7px 0px #0000003d;
+        }
+
+    }
+}
+
+input::placeholder {
+    color: #6cbd7daf;
+}
