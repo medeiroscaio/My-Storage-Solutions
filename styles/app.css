@@ -144,21 +144,21 @@ main section .buttons-section button{
     font-size: 1.6rem;
     font-weight: 600;
     padding: 20px 40px;
-    color: gray;
+    color: var(--color-light);
     background: white;
     border-radius: 10px;
     align-items: center;
-    cursor: pointer;
     transition: all 300ms ease;
 }
 
-main section .buttons-section button:hover {
+main section .buttons-section button.success:hover {
     transform: scale(1.03);
 }
 
 main section .buttons-section .success {
     background-color: var(--color-success);
     color: var(--color-dark);
+    cursor: pointer;
 }
 
 main section .buttons-section .printer {
@@ -170,7 +170,7 @@ main section .buttons-section button span {
     transition: transform 0.5s;
 }
 
-main section .buttons-section button:hover span.alterar {
+main section .buttons-section button.selected-row:hover span.alterar {
     transform: rotate(180deg);
 }
 
@@ -195,6 +195,11 @@ main section .buttons-section .search-button {
 
 .buttons-section button.selected-row {
     color: var(--color-dark);
+    cursor: pointer;
+}
+
+.buttons-section button.selected-row:hover {
+    transform: scale(1.03);
 }
 
 /* ---------- BUTTONS END -------------- */
