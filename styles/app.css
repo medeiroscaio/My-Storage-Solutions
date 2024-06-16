@@ -1,18 +1,24 @@
 @import url(general.css);
 
+body {
+    display: flex;
+}
+
 .container {
-    display: grid;
-    width: 96%;
-    margin: 0 auto;
-    gap: 1.8rem;
-    grid-template-columns: 26rem auto 2rem;
+    width: 95%;
+    height: 800px;
+    max-width: 1800px;
+    margin: auto;
 }
 
-aside {
-    height: 100vh;
+/* ------------------ LOGO E PROFILE -------------------- */
+
+#top-side {
+    display: flex;
+    margin-bottom: 1.8rem;
 }
 
-aside .top {
+#top-side .logo {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -20,101 +26,30 @@ aside .top {
     margin-left: 1.4rem;
 }
 
-aside .logo {
+#top-side .logo-contents {
+    width: 250px;
     display: flex;
     gap: 0.8rem;
     align-items: center;
     color: var(--color-white);
+    & h2 {
+        font-style: italic;
+        font-size: 19px;
+    }
 }
 
-aside .logo img {
+#top-side .logo-contents img {
     width: 6rem;
     height: 6rem;
 }
 
-/* ------------------ SIDEBAR -------------------- */
-aside .sidebar {
-    background: var(--color-white);
+#top-side .profile {
     display: flex;
-    flex-direction: column;
-    height: 80vh;
-    position: relative;
-    top: 3rem;
-    border-bottom-left-radius: 2rem;
-}
-
-aside h3 {
-    font-weight: 500;
-}
-
-aside .sidebar a {
-    display: flex;
-    color: var(--color-info-dark);
-    margin-left: 2rem;
-    gap: 1rem;
-    align-items: center;
-    position: relative;
-    height: 3.5rem;
-    transition: all 300ms ease;
-}
-
-aside .sidebar a span {
-    font-size: 1.6rem;
-    transition: all 300ms ease;
-}
-
-aside .sidebar a:last-child {
-    position: absolute;
-    bottom: 2rem;
     width: 100%;
+    justify-content: end;
 }
 
-aside .sidebar a.active {
-    background: var(--color-light);
-    color: var(--color-primary);
-    margin-left: 0;
-}
-
-aside .sidebar a.active::before {
-    content: '';
-    width: 6px;
-    height: 100%;
-    background-color: var(--color-primary);
-}
-
-aside .sidebar a.active span {
-    color: var(--color-primary);
-    margin-left: calc(1rem - 3px);
-}
-
-aside .sidebar a:hover {
-    color: var(--color-primary);
-}
-
-aside .sidebar a:hover span {
-    margin-left: 1rem;
-}
-
-aside .sidebar .message-count {
-    background-color: var(--color-danger);
-    color: var(--color-white);
-    padding: 2px 10px;
-    font-size: 11px;
-    border-radius: 0.4rem;
-}
-
-/* ----------- ASIDE END ------------- */
-
-main {
-    display: grid;
-    grid-template-rows: 10rem auto;
-}
-
-main .top {
-    align-self: center;
-}
-
-main .top .profile {
+#top-side .profile .contents {
     display: flex;
     align-items: center;
     justify-content: end;
@@ -126,61 +61,163 @@ main .top .profile {
     }
 }
 
-/* ---------- PROFILE END ----------- */
+/* ------------------ LOGO E PROFILE END -------------------- */
 
-main section {
-    margin-top: 5px;
-    height: 81vh;
+main {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 80%;
+    gap: 1.8rem;
 }
 
-main section .buttons-section {
+/* ------------------ SIDE BAR -------------------- */
+
+.side-bar-container {
+    width: 20%;
+}
+
+.side-bar-container .sidebar {
+    background: var(--color-white);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+    border-bottom-left-radius: 2rem;
+}
+
+.side-bar-container h3 {
+    font-weight: 500px;
+}
+
+.side-bar-container .sidebar a {
+    width: 100%;
+    display: flex;
+    color: var(--color-info-dark);
+    gap: 1rem;
+    align-items: center;
+    position: relative;
+    height: 3.5rem;
+}
+
+.side-bar-container .sidebar a span {
+    margin-left: 2rem;
+    font-size: 1.6rem;
+    transition: all 300ms ease;
+}
+
+.side-bar-container .sidebar a:last-child {
+    position: absolute;
+    bottom: 1rem;
+}
+
+.side-bar-container .sidebar a.active {
+    background: var(--color-light);
+    color: var(--color-primary);
+}
+
+.side-bar-container .sidebar a.active::before {
+    content: '';
+    width: 6px;
+    height: 100%;
+    background-color: var(--color-primary);
+}
+
+.side-bar-container .sidebar a.active span {
+    color: var(--color-primary);
+    margin-left: calc(1rem - 3px);
+}
+
+.side-bar-container .sidebar a:hover {
+    color: var(--color-primary);
+}
+
+.side-bar-container .sidebar a:hover span {
+    margin-left: 3rem;
+}
+
+.side-bar-container .sidebar .message-count {
+    background-color: var(--color-danger);
+    color: var(--color-white);
+    padding: 2px 10px;
+    font-size: 11px;
+    border-radius: 0.4rem;
+}
+
+/* ------------------ SIDEBAR END -------------------- */
+
+/* ------------------ BOTÕES E TABELA -------------------- */
+
+#produtos-painel {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    gap: 1.8rem;
+}
+
+#produtos-painel .buttons-section {
     display: flex;
     justify-content: space-between;
+    gap: 10px;
 }
 
-main section .buttons-section button{
+#produtos-painel .buttons-section .button {
+    position: relative;
     display: flex;
     gap: 0.8rem;
     font-size: 1.6rem;
     font-weight: 600;
-    padding: 20px 40px;
+    padding: 5px 10px;
     color: var(--color-light);
     background: white;
     border-radius: 10px;
     align-items: center;
+    cursor: pointer;
     transition: all 300ms ease;
+    & .mensagem {
+        color: var(--color-dark);
+        display: none;
+    }
+    & p {
+        color: var(--color-light);
+    }
 }
 
-main section .buttons-section button.success:hover {
+#produtos-painel .buttons-section .button:hover {
     transform: scale(1.03);
 }
 
-main section .buttons-section .success {
+#produtos-painel .buttons-section .success {
     background-color: var(--color-success);
     color: var(--color-dark);
     cursor: pointer;
+    & p {
+        color: var(--color-dark);
+    }
 }
 
-main section .buttons-section .printer {
+#produtos-painel .buttons-section .printer {
     padding: 20px 20px;
 }
 
-main section .buttons-section button span {
+#produtos-painel .buttons-section .button span {
     font-size: 2.3rem;
     transition: transform 0.5s;
 }
 
-main section .buttons-section button.selected-row:hover span.alterar {
-    transform: rotate(180deg);
+#btnAlterar:hover {
+    & span.alterar {
+        transform: rotate(180deg);
+    }
 }
 
-main section .buttons-section .search-button {
+#produtos-painel .buttons-section .search-button {
     display: flex;
     align-items: center;
     text-align: center;
     background: white;
     border-radius: 10px;
-    width: 480px;
+    width: 30%;
     justify-content: start;
     & span {
         margin-left: 15px;
@@ -188,25 +225,27 @@ main section .buttons-section .search-button {
         font-size: 2.5rem;
     }
     & input {
+        width: 100%;
         font-size: 1.6rem;
         margin-top: 5px;
     }
 }
 
-.buttons-section button.selected-row {
+.buttons-section .button.selected-row {
     color: var(--color-dark);
     cursor: pointer;
 }
 
-.buttons-section button.selected-row:hover {
+.buttons-section .button.selected-row:hover {
     transform: scale(1.03);
 }
 
 /* ---------- BUTTONS END -------------- */
 
-main section .products-list {
-    margin-top: 2rem;
-    height: 69.5vh;
+/* ------------------ TABELA -------------------- */
+
+#produtos-painel .products-list {
+    border-radius: 0 0 2rem;
     background: white;
     width: 100%;
     overflow: auto;
@@ -224,14 +263,11 @@ main section .products-list {
     background-color: var(--color-info-dark);
 }
 
-
 .products-list:hover::-webkit-scrollbar-thumb{
     visibility: visible;
 }
 
-
-
-main section .products-list table{
+#produtos-painel .products-list table{
     width: 100%;
     text-align: center;
     padding: 1.2rem;
@@ -258,23 +294,23 @@ main section .products-list table{
     cursor: pointer;
 }
 
-main section .products-list table tbody tr{
+#produtos-painel .products-list table tbody tr{
     line-height: 50px;
 }
 
-main section .products-list table tbody td{
+#produtos-painel .products-list table tbody td{
     border-bottom: 1px solid var(--color-light);
 }
 
-main section .products-list table tbody tr:last-child td{
+#produtos-painel .products-list table tbody tr:last-child td{
     border: none;
 }
 
-main section .products-list table tbody .money {
+#produtos-painel .products-list table tbody .money {
     font-style: italic;
 }
 
-main section .products-list table tbody tr:hover td{
+#produtos-painel .products-list table tbody tr:hover td{
     background-color: var(--color-light);
 }
 
@@ -295,3 +331,45 @@ main section .products-list table tbody tr:hover td{
     }
 }
 
+/* ------------------ TABELA END -------------------- */
+
+/* ------------------ MEDIA -------------------- */
+@media (max-width: 1800px) {
+    body {
+        height: 100%;
+    }
+}
+
+@media (max-width: 1113px) {
+    .button {
+        & span {
+            padding: 0px 10px;
+
+        }
+        & p {
+            display: none;
+        }
+    }
+    #produtos-painel .buttons-section .button:hover {
+        .mensagem {
+            position: absolute;
+            bottom: 100%;
+            right: -35%;
+            background-color: white;
+            border-radius: 3px;
+            padding: 5px;
+            display: block;
+        }
+    }
+    #produtos-painel #btnAlterar:hover {
+        & .mensagem {
+            right: -13%;
+        }
+    }
+
+    #produtos-painel #btnRemover:hover {
+        & .mensagem {
+            right: -30%;
+        }
+    }
+}

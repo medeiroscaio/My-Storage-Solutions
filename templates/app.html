@@ -13,70 +13,91 @@
 </head>
 <body>
     <div class="container">
-        <aside>
-            <div class="top">
-                <div class="logo">
+        
+        <div id="top-side">
+
+            <div class="logo">
+                <div class="logo-contents">
                     <img src="../sources/logo.png" alt="">
                     <h2>MY STORAGE <br> SOLUTIONS</h2>
                 </div>
             </div>
 
-            <div class="sidebar">
-                <a href="#" class="active">
-                    <span class="material-symbols-outlined">view_list</span>
-                    <h3>Dashboard</h3>
-                </a>
-                <a href="#">
-                    <span class="material-symbols-outlined">person</span>
-                    <h3>Usuarios</h3>
-                </a>
-                <a href="#">
-                    <span class="material-symbols-outlined">receipt_long</span>
-                    <h3>Relatorios</h3>
-                </a>
-                <a href="#">
-                    <span class="material-symbols-outlined">notifications</span>
-                    <h3>Notificacoes</h3>
-                    <span class="message-count">13</span>
-                </a>
-                <a href="#">
-                    <span class="material-symbols-outlined">settings</span>
-                    <h3>Configuracoes</h3>
-                </a>
-                <a href="#">
-                    <span class="material-symbols-outlined">logout</span>
-                    <h3>Sair...</h3>
-                </a>
-            </div>
-        </aside>
-        <!-- =========== ASIDE END ============= -->
-
-        <main>
-            <div class="top">
-                <div class="profile">
+            <div class="profile">
+                <div class="contents">
                     <h2>Ola <span>Welder</span>, Bom-dia!</h2>
                     <div class="profile-photo">
                         <img src="../sources/profile.png" alt="">
                     </div>
-                </div>
-            </div>
 
-            <section>
-                <div class="buttons-section">
-                    <button id="btnCadastrar" class="success"><span class="material-symbols-outlined">package_2</span>Cadastrar</button>
-                    <button id="btnAlterar"><span class="material-symbols-outlined alterar">cached</span>Alterar</button>
-                    <button id="btnRemover"><span class="material-symbols-outlined">delete</span>Remover</button>
-                    <button class="printer"> 
+                </div>
+            </div> <!-- PROFILE -->
+
+        </div> <!-- TOP-SIDE -->
+
+        <main id="main">
+            <section class="side-bar-container">
+                <div class="sidebar">
+                    <a href="#" class="active">
+                        <span class="material-symbols-outlined">view_list</span>
+                        <h3>Dashboard</h3>
+                    </a>
+                    <a href="#">
+                        <span class="material-symbols-outlined">person</span>
+                        <h3>Usuarios</h3>
+                    </a>
+                    <a href="#">
+                        <span class="material-symbols-outlined">receipt_long</span>
+                        <h3>Relatorios</h3>
+                    </a>
+                    <a href="#">
+                        <span class="material-symbols-outlined">notifications</span>
+                        <h3>Notificacoes</h3>
+                        <span class="message-count">13</span>
+                    </a>
+                    <a href="#">
+                        <span class="material-symbols-outlined">settings</span>
+                        <h3>Configuracoes</h3>
+                    </a>
+                    <a href="#">
+                        <span class="material-symbols-outlined">logout</span>
+                        <h3>Sair...</h3>
+                    </a>
+                </div>
+            </section>
+
+            <section id="produtos-painel">
+                <div class="buttons-section" id="buttons-section">
+
+                    <div id="btnCadastrar" class="button success">
+                        <span class="material-symbols-outlined">package_2</span>
+                        <div class="mensagem">Cadastrar</div>
+                        <p>Cadastrar</p>
+                    </div>
+                    <div id="btnAlterar" class="button">
+                        <span class="material-symbols-outlined alterar">cached</span>
+                        <div class="mensagem">Alterar</div>
+                        <p>Alterar</p>
+                    </div>
+                    <div id="btnRemover" class="button">
+                        <span class="material-symbols-outlined">delete</span>
+                        <div class="mensagem">Remover</div>
+                        <p>Remover</p>
+                    </div>
+
+                    <div class="printer button">
                         <span class="material-symbols-outlined">print</span>
-                        <span class="material-symbols-outlined">arrow_drop_down</span></button>
+                        <span class="material-symbols-outlined">arrow_drop_down</span>
+                    </div>
+                    
+                    
                     <div class="search-button">
                         <span class="material-symbols-outlined">search</span>
                         <input type="text" placeholder="Pesquisar..." ><span class="material-symbols-outlined">
                     </div>
                 </div>
-                <!-- =========== BUTTONS END =========== -->
 
-                <div class="products-list">
+                <div class="products-list" id="products-list">
                     <table id="produtosTable" class="grid-table">
                         <thead class="table-head">
                             <tr>
@@ -94,9 +115,10 @@
                         </tbody>
                     </table>
                 </div>
-                <!-- =========== PRODUCTS-LIST END =========== -->
+
             </section>
         </main>
+        
     </div>
     <script src="../scripts/app.js"></script>
     <script src="../scripts/script.js"></script>
