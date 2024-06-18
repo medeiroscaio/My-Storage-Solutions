@@ -1,54 +1,126 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sistema de Controle de Estoque</title>
-    <link rel="stylesheet" href="/My-Storage-Solutions/styles/style.css" />
-  </head>
-  <body>
-    <h1>Sistema de Controle de Estoque</h1>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <form id="produtoForm">
-      <h2>Cadastrar/Alterar Produto</h2>
-      <input type="hidden" id="codigo" name="codigo" />
-      <label for="descricao">Descrição:</label>
-      <input type="text" id="descricao" name="descricao" required />
-      <br />
-      <label for="tipo">Tipo:</label>
-      <input type="text" id="tipo" name="tipo" required />
-      <br />
-      <label for="quantidade">Quantidade:</label>
-      <input type="number" id="quantidade" name="quantidade" required />
-      <br />
-      <label for="custo">Custo:</label>
-      <input type="number" step="0.01" id="custo" name="custo" required />
-      <br />
-      <label for="preco">Preço:</label>
-      <input type="number" step="0.01" id="preco" name="preco" required />
-      <br />
-      <button type="submit">Salvar</button>
-      <button type="button" onclick="limparFormulario()">Limpar</button>
-    </form>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 
-    <h2>Lista de Produtos</h2>
-    <table id="produtosTable">
-      <thead>
-        <tr>
-          <th>Código</th>
-          <th>Descrição</th>
-          <th>Tipo</th>
-          <th>Quantidade</th>
-          <th>Entradas</th>
-          <th>Saídas</th>
-          <th>Custo</th>
-          <th>Preço</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
+    <link rel="stylesheet" href="styles/general.css">
+    <link rel="stylesheet" href="styles/app.css">
 
-    <script src="/My-Storage-Solutions/scripts/script.js"></script>
-  </body>
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        
+        <div id="top-side">
+
+            <div class="logo">
+                <div class="logo-contents">
+                    <img src="sources/logo.png" alt="">
+                    <h2>MY STORAGE <br> SOLUTIONS</h2>
+                </div>
+            </div>
+
+            <div class="profile">
+                <div class="contents">
+                    <h2>Ola <span>Welder</span>, Bom-dia!</h2>
+                    <div class="profile-photo">
+                        <img src="sources/profile.png" alt="">
+                    </div>
+
+                </div>
+            </div> <!-- PROFILE -->
+
+        </div> <!-- TOP-SIDE -->
+
+        <main id="main">
+            <section class="side-bar-container">
+                <div class="sidebar">
+                    <a href="#" class="active">
+                        <span class="material-symbols-outlined">view_list</span>
+                        <h3>Dashboard</h3>
+                    </a>
+                    <a href="#">
+                        <span class="material-symbols-outlined">person</span>
+                        <h3>Usuarios</h3>
+                    </a>
+                    <a href="#">
+                        <span class="material-symbols-outlined">receipt_long</span>
+                        <h3>Relatorios</h3>
+                    </a>
+                    <a href="#">
+                        <span class="material-symbols-outlined">notifications</span>
+                        <h3>Notificacoes</h3>
+                        <span class="message-count">13</span>
+                    </a>
+                    <a href="#">
+                        <span class="material-symbols-outlined">settings</span>
+                        <h3>Configuracoes</h3>
+                    </a>
+                    <a href="#">
+                        <span class="material-symbols-outlined">logout</span>
+                        <h3>Sair...</h3>
+                    </a>
+                </div>
+            </section>
+
+            <section id="produtos-painel">
+                <div class="buttons-section" id="buttons-section">
+
+                    <div id="btnCadastrar" class="button success">
+                        <span class="material-symbols-outlined">package_2</span>
+                        <div class="mensagem">Cadastrar</div>
+                        <p>Cadastrar</p>
+                    </div>
+                    <div id="btnAlterar" class="button">
+                        <span class="material-symbols-outlined alterar">cached</span>
+                        <div class="mensagem">Alterar</div>
+                        <p>Alterar</p>
+                    </div>
+                    <div id="btnRemover" class="button">
+                        <span class="material-symbols-outlined">delete</span>
+                        <div class="mensagem">Remover</div>
+                        <p>Remover</p>
+                    </div>
+
+                    <div class="printer button">
+                        <span class="material-symbols-outlined">print</span>
+                        <span class="material-symbols-outlined">arrow_drop_down</span>
+                    </div>
+                    
+                    
+                    <div class="search-button">
+                        <span class="material-symbols-outlined">search</span>
+                        <input type="text" placeholder="Pesquisar..." ><span class="material-symbols-outlined">
+                    </div>
+                </div>
+
+                <div class="products-list" id="products-list">
+                    <table id="produtosTable" class="grid-table">
+                        <thead class="table-head">
+                            <tr>
+                                <th> <p>Cod.</p> </th>
+                                <th id="descricao"> <p>Descricao</p> </th>
+                                <th style="width: 120px;"> <p>Tipo</p> </th>
+                                <th> <p>Estoque</p> </th>
+                                <th class="entradas"> <p>Entradas</p> </th>
+                                <th> <p>Saidas</p></th>
+                                <th><p>Custo</p></th>
+                                <th><p>Preco</p></th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-body">
+                        </tbody>
+                    </table>
+                </div>
+
+            </section>
+        </main>
+        
+    </div>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/script.js"></script>
+</body>
 </html>
