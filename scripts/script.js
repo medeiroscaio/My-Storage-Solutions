@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             const row = document.createElement('tr');
             row.innerHTML = `
                 <td class="produto-codigo">${produto.codigo}</td>
-                <td class="produto-nome"><p >${produto.nome}</p></td>
+                <td class="produto-nome"><p>${produto.nome}</p></td>
                 <td class="produto-tipo">${produto.tipo}</td>
                 <td class="warning">${produto.quantidade}</td>
                 <td class="money">$${produto.custo}</td>
@@ -107,6 +107,53 @@ document.addEventListener('DOMContentLoaded', (event) => {
             tbody.appendChild(row);
         }
     }
+
+
+    /// FILTRO E BARRA DE PESQUISA ///
+
+    let filtroSelecionado = 'codigo'; // Filtro padrão
+
+    document.querySelectorAll('.filter-option').forEach(option => {
+        option.addEventListener('click', function() {
+            filtroSelecionado = this.getAttribute('data-filter');
+            document.querySelector('.filtro.button span:first-child').textContent = this.textContent;
+        });
+    });
+
+    document.querySelector('.search-button input').addEventListener('input', function() {
+        const query = this.value.trim().toLowerCase();
+        filtrarProdutos(query);
+    });
+
+    function filtrarProdutos(query) {
+        const tbody = document.querySelector('#produtosTable tbody');
+        tbody.innerHTML = '';
+        for (const codigo in estoque) {
+            const produto = estoque[codigo];
+            let match = false;
+            if (filtroSelecionado === 'codigo' && produto.codigo.toString().includes(query)) {
+                match = true;
+            } else if (filtroSelecionado === 'nome' && produto.nome.toLowerCase().includes(query)) {
+                match = true;
+            } else if (filtroSelecionado === 'tipo' && produto.tipo.toLowerCase().includes(query)) {
+                match = true;
+            }
+            if (match) {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="produto-codigo">${produto.codigo}</td>
+                    <td class="produto-nome"><p>${produto.nome}</p></td>
+                    <td class="produto-tipo">${produto.tipo}</td>
+                    <td class="warning">${produto.quantidade}</td>
+                    <td class="money">$${produto.custo}</td>
+                    <td class="money">$${produto.preco}</td>
+                `;
+                tbody.appendChild(row);
+            }
+        }
+    }
+
+    /// FILTRO E BARRA DE PESQUISA END ///
 
     addRowListeners(); // Inicializa event listeners para as linhas existentes (se houver)
     listarProdutos();
