@@ -21,9 +21,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     class Produto {
         static codigoAutoIncrement = 1;
-        constructor(descricao, tipo, quantidade, custo, preco) {
+        constructor(nome, tipo, quantidade, custo, preco) {
             this.codigo = Produto.codigoAutoIncrement++;
-            this.descricao = descricao;
+            this.nome = nome;
             this.tipo = tipo;
             this.quantidade = quantidade;
             this.entradas = 0;
@@ -36,12 +36,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const estoque = {};
 
     document.getElementById('btnCadastrar').addEventListener('click', function() {
-        const descricao = prompt("Descrição do Produto:");
+        const nome = prompt("Nome do Produto:");
         const tipo = prompt("Tipo do Produto:");
         const quantidade = parseInt(prompt("Quantidade do Produto:"));
         const custo = parseFloat(prompt("Custo do Produto:"));
         const preco = parseFloat(prompt("Preço do Produto:"));
-        cadastrarProduto(descricao, tipo, quantidade, custo, preco);
+        cadastrarProduto(nome, tipo, quantidade, custo, preco);
         listarProdutos();
         addRowListeners(); // Adiciona event listeners às novas linhas
     });
@@ -50,12 +50,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
         const codigo = parseInt(prompt("Código do Produto a ser alterado:"));
         const produto = estoque[codigo];
         if (produto) {
-            const descricao = prompt("Nova Descrição do Produto:", produto.descricao);
+            const nome = prompt("Novo Nome do Produto:", produto.nome);
             const tipo = prompt("Novo Tipo do Produto:", produto.tipo);
             const quantidade = parseInt(prompt("Nova Quantidade do Produto:", produto.quantidade));
             const custo = parseFloat(prompt("Novo Custo do Produto:", produto.custo));
             const preco = parseFloat(prompt("Novo Preço do Produto:", produto.preco));
-            alterarProduto(codigo, descricao, tipo, quantidade, custo, preco);
+            alterarProduto(codigo, nome, tipo, quantidade, custo, preco);
             listarProdutos();
             addRowListeners(); // Adiciona event listeners às novas linhas
         } else {
@@ -69,15 +69,15 @@ document.addEventListener('DOMContentLoaded', (event) => {
         addRowListeners(); // Atualiza event listeners após remover linha
     });
 
-    function cadastrarProduto(descricao, tipo, quantidade, custo, preco) {
-        const produto = new Produto(descricao, tipo, quantidade, custo, preco);
+    function cadastrarProduto(nome, tipo, quantidade, custo, preco) {
+        const produto = new Produto(nome, tipo, quantidade, custo, preco);
         estoque[produto.codigo] = produto;
     }
 
-    function alterarProduto(codigo, descricao, tipo, quantidade, custo, preco) {
+    function alterarProduto(codigo, nome, tipo, quantidade, custo, preco) {
         const produto = estoque[codigo];
         if (produto) {
-            produto.descricao = descricao;
+            produto.nome = nome;
             produto.tipo = tipo;
             produto.quantidade = quantidade;
             produto.custo = custo;
@@ -97,12 +97,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
             const produto = estoque[codigo];
             const row = document.createElement('tr');
             row.innerHTML = `
-                <td>${produto.codigo}</td>
-                <td><p>${produto.descricao}</p></td>
-                <td>${produto.tipo}</td>
+                <td class="produto-codigo">${produto.codigo}</td>
+                <td class="produto-nome"><p >${produto.nome}</p></td>
+                <td class="produto-tipo">${produto.tipo}</td>
                 <td class="warning">${produto.quantidade}</td>
-                <td>${produto.entradas}</td>
-                <td>${produto.saidas}</td>
                 <td class="money">$${produto.custo}</td>
                 <td class="money">$${produto.preco}</td>
             `;
