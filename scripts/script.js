@@ -1,107 +1,142 @@
-document.addEventListener("DOMContentLoaded", (event) => {
-  const notificationIcon = document.getElementById("notification-icon");
-  const notificationPopup = document.getElementById("notification-popup");
-  const notificationCountElement =
-    document.getElementById("notification-count");
-  const notificationList = document.getElementById("notification-list");
-  const noNotificationsElement = document.getElementById("no-notifications");
-  const lowStockLimit = 5;
-  let notificationCount = 0;
-  let notifications = [];
-  let productStates = {};
+const notificationIcon = document.getElementById("notification-icon");
+const notificationPopup = document.getElementById("notification-popup");
+const notificationCountElement =
+  document.getElementById("notification-count");
+const notificationList = document.getElementById("notification-list");
+const noNotificationsElement = document.getElementById("no-notifications");
+const lowStockLimit = 5;
+let notificationCount = 0;
 
-  notificationIcon.addEventListener("click", (event) => {
-    event.stopPropagation();
-    if (notificationPopup.classList.contains("hidden")) {
-      notificationPopup.classList.remove("hidden");
-      displayNotifications();
-      notificationCount = 0;
-      notificationCountElement.textContent = notificationCount;
-    } else {
-      notificationPopup.classList.add("hidden");
-    }
-  });
-
-  document.addEventListener("click", (event) => {
-    if (!notificationPopup.classList.contains("hidden")) {
-      notificationPopup.classList.add("hidden");
-    }
-  });
-
-  function addNotification(message, productId, state) {
-    const timestamp = new Date().toISOString();
-    const notification = {
-      message,
-      productId,
-      state,
-      timestamp,
-    };
-    notifications.unshift(notification);
-    notificationCount++;
+notificationIcon.addEventListener("click", (event) => {
+  event.stopPropagation();
+  if (notificationPopup.classList.contains("hidden")) {
+    notificationPopup.classList.remove("hidden");
+    displayNotifications();
+    notificationCount = 0;
     notificationCountElement.textContent = notificationCount;
-    productStates[productId] = state;
+  } else {
+    notificationPopup.classList.add("hidden");
   }
+});
 
-  function displayNotifications() {
-    notificationList.innerHTML = "";
-    if (notifications.length === 0) {
-      noNotificationsElement.classList.remove("hidden");
-    } else {
-      noNotificationsElement.classList.add("hidden");
-      notifications.forEach((notification) => {
-        const listItem = document.createElement("li");
-        listItem.innerHTML = notification.message;
-        notificationList.appendChild(listItem);
-      });
-    }
+document.addEventListener("click", (event) => {
+  if (!notificationPopup.classList.contains("hidden")) {
+    notificationPopup.classList.add("hidden");
   }
+});
 
+function addNotification(message, productId, state) {
+  const timestamp = new Date().toISOString();
+  const notification = {
+    message,
+    productId,
+    state,
+    timestamp,
+  };
+  notifications.unshift(notification);
+  notificationCount++;
+  notificationCountElement.textContent = notificationCount;
+  productStates[productId] = state;
+}
+
+function displayNotifications() {
+  notificationList.innerHTML = "";
+  if (notifications.length === 0) {
+    noNotificationsElement.classList.remove("hidden");
+  } else {
+    noNotificationsElement.classList.add("hidden");
+    notifications.forEach((notification) => {
+      const listItem = document.createElement("li");
+      listItem.innerHTML = notification.message;
+      notificationList.appendChild(listItem);
+    });
+  }
+}
+
+class Produto {
+  static codigoAutoIncrement = 1;
+  constructor(nome, tipo, quantidade, custo, preco) {
+    this.codigo = Produto.codigoAutoIncrement++;
+    this.nome = nome;
+    this.tipo = tipo;
+    this.quantidade = quantidade;
+    this.entradas = 0;
+    this.saidas = 0;
+    this.custo = custo;
+    this.preco = preco;
+  }
+}
+
+function limparFormulario() {
+  document.getElementById('nome').value = '';
+  document.getElementById('tipo').value = '';
+  document.getElementById('quantidade').value = '';
+  document.getElementById('custo').value = '';
+  document.getElementById('preco').value = '';
+}
+
+const estoque = {};
+const notifications = [];
+const productStates = {};
+
+function cadastrarProduto(nome, tipo, quantidade, custo, preco) {
+  const produto = new Produto(nome, tipo, quantidade, custo, preco);
+  estoque[produto.codigo] = produto;
+  productStates[produto.codigo] = "normal";
+  listarProdutos();
+  addRowListeners();
+  limparFormulario();
+}
+
+function addRowListeners() {
+  const rows = document.querySelectorAll(".table-body tr");
   const buttons = document.querySelectorAll(".buttons-section .button");
-
-  function addRowListeners() {
-    const rows = document.querySelectorAll(".table-body tr");
-    rows.forEach((row) => {
-      row.addEventListener("click", () => {
-        if (row.classList.contains("selected")) {
-          row.classList.remove("selected");
-          buttons.forEach((button) => button.classList.remove("selected-row"));
-        } else {
-          rows.forEach((r) => r.classList.remove("selected"));
-          row.classList.add("selected");
-          buttons.forEach((button) => button.classList.add("selected-row"));
-        }
-      });
+  rows.forEach((row) => {
+    row.addEventListener("click", () => {
+      if (row.classList.contains("selected")) {
+        row.classList.remove("selected");
+        buttons.forEach((button) => button.classList.remove("selected-row"));
+      } else {
+        rows.forEach((r) => r.classList.remove("selected"));
+        row.classList.add("selected");
+        buttons.forEach((button) => button.classList.add("selected-row"));
+      }
     });
-  }
+  });
+}
 
-  class Produto {
-    static codigoAutoIncrement = 1;
-    constructor(nome, tipo, quantidade, custo, preco) {
-      this.codigo = Produto.codigoAutoIncrement++;
-      this.nome = nome;
-      this.tipo = tipo;
-      this.quantidade = quantidade;
-      this.entradas = 0;
-      this.saidas = 0;
-      this.custo = custo;
-      this.preco = preco;
+function listarProdutos() {
+  const tbody = document.querySelector("#produtosTable tbody");
+  tbody.innerHTML = "";
+  for (const codigo in estoque) {
+    const produto = estoque[codigo];
+    const row = document.createElement("tr");
+    row.className =
+      produto.quantidade <= lowStockLimit ? "low-stock" : "in-stock";
+    row.innerHTML = `
+      <td class="produto-codigo"><div class="barra"></div>${
+        produto.codigo
+      }</td>
+      <td class="produto-nome"><p>${produto.nome}</p></td>
+      <td class="produto-tipo"><p>${produto.tipo}</p></td>
+      <td class="stock-status">${produto.quantidade}</td>
+      <td class="money">$${produto.custo.toFixed(2)}</td>
+      <td class="money">${produto.preco.toFixed(2)}</td>
+    `;
+    tbody.appendChild(row);
+
+    if (produto.quantidade <= lowStockLimit) {
+      const notification = `<p><i class="fa-solid fa-triangle-exclamation warning"></i> Produto ${produto.codigo} está com estoque baixo!</p>`;
+      if (productStates[produto.codigo] !== "lowStock") {
+        addNotification(notification, produto.codigo, "lowStock");
+      }
+    } else {
+      productStates[produto.codigo] = "normal";
     }
   }
+}
 
-  const estoque = {};
-
-  document
-    .getElementById("btnCadastrar")
-    .addEventListener("click", function () {
-      const nome = prompt("Nome do Produto:");
-      const tipo = prompt("Tipo do Produto:");
-      const quantidade = parseInt(prompt("Quantidade do Produto:"));
-      const custo = parseFloat(prompt("Custo do Produto:"));
-      const preco = parseFloat(prompt("Preço do Produto:"));
-      cadastrarProduto(nome, tipo, quantidade, custo, preco);
-      listarProdutos();
-      addRowListeners();
-    });
+document.addEventListener("DOMContentLoaded", (event) => {
 
   document.getElementById("btnAlterar").addEventListener("click", function () {
     const codigo = parseInt(prompt("Código do Produto a ser alterado:"));
@@ -129,12 +164,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
     addRowListeners();
   });
 
-  function cadastrarProduto(nome, tipo, quantidade, custo, preco) {
-    const produto = new Produto(nome, tipo, quantidade, custo, preco);
-    estoque[produto.codigo] = produto;
-    productStates[produto.codigo] = "normal";
-  }
-
   function alterarProduto(codigo, nome, tipo, quantidade, custo, preco) {
     const produto = estoque[codigo];
     if (produto) {
@@ -160,12 +189,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
       produto.custo = custo;
       produto.preco = preco;
     }
-  }
-
-  function removerProduto(codigo) {
-    delete estoque[codigo];
-    delete productStates[codigo];
-    listarProdutos();
   }
 
   function listarProdutos() {
@@ -214,6 +237,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
       filtrarProdutos(query);
     });
 
+  function removerProduto(codigo) {
+    delete estoque[codigo];
+    delete productStates[codigo];
+    listarProdutos();
+  }
+
   function filtrarProdutos(query) {
     const tbody = document.querySelector("#produtosTable tbody");
     tbody.innerHTML = "";
@@ -258,3 +287,5 @@ document.addEventListener("DOMContentLoaded", (event) => {
   addRowListeners();
   listarProdutos();
 });
+
+export {cadastrarProduto};
