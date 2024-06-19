@@ -258,3 +258,5 @@ document.addEventListener("DOMContentLoaded", (event) => {
   listarProdutos();
   addRowListeners();
 });
+
+export {cadastrarProduto};
