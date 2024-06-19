@@ -8,6 +8,8 @@
 
     <link rel="stylesheet" href="styles/general.css">
     <link rel="stylesheet" href="styles/app.css">
+    <link rel="stylesheet" href="styles/notification.css">
+
 
     <title>Document</title>
 </head>
@@ -50,11 +52,17 @@
                         <span class="material-symbols-outlined">receipt_long</span>
                         <h3>Relatórios</h3>
                     </a>
-                    <a href="#">
+                    <a href="#" id="notification-icon">
                         <span class="material-symbols-outlined">notifications</span>
                         <h3>Notificações</h3>
-                        <span class="message-count">13</span>
+                        <span class="message-count" id="notification-count">0</span>
                     </a>
+                    <div class="notification-main">
+                        <div id="notification-popup" class="notification-popup hidden">
+                            <ul id="notification-list"></ul>
+                            <p id="no-notifications" class="hidden">Não há mensagens novas</p>
+                        </div>
+                </div>
                 </div>
             </section>
 
@@ -76,6 +84,7 @@
                         <div class="mensagem">Remover</div>
                         <p>Remover</p>
                     </div>
+
                     <div class="filtro button">
                         <span class="filtro-texto">Filtro</span>
                         <span class="material-symbols-outlined">arrow_drop_down</span>
@@ -85,6 +94,8 @@
                             <p class="filter-option" data-filter="tipo">Tipo</p>
                         </div>
                     </div>
+                    
+                    
                     <div class="search-button">
                         <span class="material-symbols-outlined">search</span>
                         <input type="text" placeholder="Pesquisar..." ><span class="material-symbols-outlined">
@@ -114,5 +125,9 @@
     </div>
     <script src="scripts/app.js"></script>
     <script src="scripts/script.js"></script>
+    <script
+      src="https://kit.fontawesome.com/49272a6f5a.js"
+      crossorigin="anonymous"
+    ></script>
 </body>
 </html>
