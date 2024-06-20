@@ -293,6 +293,16 @@ main {
 
 /* ------------------ TABELA -------------------- */
 
+#dashboard-painel {
+    display: none;
+
+}
+
+#relatorio-list {
+    display: none;
+
+}
+
 #produtos-painel .products-list {
     border-radius: 0 0 2rem;
     background: white;

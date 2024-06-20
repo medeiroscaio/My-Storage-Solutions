@@ -41,15 +41,15 @@
         <main id="main">
             <section class="side-bar-container">
                 <div class="sidebar">
-                    <a href="#" class="active">
+                    <a href="#" class="active" id="tabela">
                         <span class="material-symbols-outlined">view_list</span>
                         <h3>Tabela</h3>
                     </a>
-                    <a href="#">
+                    <a href="#" id="dashboard">
                         <span class="material-symbols-outlined">person</span>
                         <h3>Dashboard</h3>
                     </a>
-                    <a href="#">
+                    <a href="#" id="relatorio">
                         <span class="material-symbols-outlined">receipt_long</span>
                         <h3>Relatórios</h3>
                     </a>
@@ -135,6 +135,26 @@
                                 <th> <p>Estoque</p> </th>
                                 <th> <p>Custo</p></th>
                                 <th> <p>Preco</p></th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-body">
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="dashboard-painel">
+
+                </div>
+
+                <div class="products-list" id="relatorio-list">
+                    <table id="relatorio-table" class="grid-table">
+                        <thead class="relatorio-table-head table-head">
+                            <tr>
+                                <th> <p>Cod.</p> </th>
+                                <th> <p>Nome</p> </th>
+                                <th> <p>Tipo</p> </th>
+                                <th> <p>Destino</p> </th>
+                                <th> <p>Data</p></th>
                             </tr>
                         </thead>
                         <tbody class="table-body">
