@@ -360,6 +360,10 @@ main {
     border-bottom: 1px solid var(--color-light);
 }
 
+#produtos-painel .products-list table tbody td #destino {
+    color: green;
+}
+
 #produtos-painel .products-list table tbody tr:last-child td{
     border: none;
 }

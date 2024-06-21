@@ -79,7 +79,7 @@ notificationIcon.addEventListener("click", (event) => {
             this.produto = produto;
             this.destino = destino;
             this.#d = new Date()
-            this.data = `${this.#d.getDate()}/${this.#d.getMonth() + 1}/${this.#d.getFullYear()} ${this.#d.getHours()}:${this.#d.getMinutes()}`
+            this.data = `${(this.#d.getDate()).toString().padStart(2, '0')}/${(this.#d.getMonth() + 1).toString().padStart(2, '0')}/${this.#d.getFullYear()} ${this.#d.getHours()}:${this.#d.getMinutes()}`
         }
     }
   
@@ -195,9 +195,13 @@ notificationIcon.addEventListener("click", (event) => {
       let porcentagemAtiva = 0
       let porcentagemRemovida = 0
       estoque.forEach((produto) => {
-      totalEstoque += produto.quantidade
+        if (isNaN(produto.quantidade)) {
+        } else {
+          totalEstoque += produto.quantidade
+        }
       })
       
+
       document.querySelector('.quantidade-total-estoque h1 span').innerHTML = totalEstoque
       document.querySelector('.produtos-cadastrados .cor-de-fundo h2').innerHTML = totalProduto
       document.querySelector('.produtos-ativos .cor-de-fundo h2').innerHTML = produtosAtivos
@@ -243,10 +247,15 @@ notificationIcon.addEventListener("click", (event) => {
                 <td class="produto-codigo">${relatorio.produto.codigo}</td>
                 <td class="produto-nome"><p>${relatorio.produto.nome}</p></td>
                 <td class="produto-tipo">${relatorio.produto.tipo}</td>
-                <td class="warning">${relatorio.destino}</td>
+                <td class="warning destino">${relatorio.destino}</td>
                 <td class="money">${relatorio.data}</td>
             `;
             tbody.appendChild(row);
+            document.querySelectorAll('.destino').forEach(function(valor) {
+              if (valor.textContent.trim() == 'CADASTRADO') {
+                valor.style.color = 'green';
+            }
+          });
         })
     } // LISTAR TABELA DE RELATORIO
   
