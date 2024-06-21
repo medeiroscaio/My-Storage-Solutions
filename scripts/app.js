@@ -1,4 +1,3 @@
-
 var tabelas = document.querySelectorAll('.products-list');
 var tamanhoMain = document.getElementById('main').getBoundingClientRect().height;
 var tamanhoButtonSection = document.getElementById('buttons-section').getBoundingClientRect().height;

@@ -6,6 +6,9 @@ const notificationList = document.getElementById("notification-list");
 const noNotificationsElement = document.getElementById("no-notifications");
 const lowStockLimit = 5;
 let notificationCount = 0;
+let totalProduto = 0
+let produtosAtivos = 0
+let produtosRemovidos = 0
 
 // Variáveis Globais
 let filtroSelecionado = "codigo"; // Define um filtro padrão
@@ -88,18 +91,25 @@ notificationIcon.addEventListener("click", (event) => {
     document.getElementById('preco').value = '';
   }
   
-  const estoque = {};
+  const estoque = [];
   const listRelatorio = []
   const notifications = [];
   const productStates = {};
   
+  function listarTodos() {
+    listarProdutos()
+    listarDashboard()
+    listarRelatorio()
+  }
+
   function cadastrarProduto(nome, tipo, quantidade, custo, preco) {
     const produto = new Produto(nome, tipo, quantidade, custo, preco);
     estoque[produto.codigo] = produto;
     productStates[produto.codigo] = "normal";
+    totalProduto += 1
+    produtosAtivos += 1
     cadastrarRelatorio(produto,'CADASTRADO')
-    listarRelatorio();
-    listarProdutos();
+    listarTodos()
     addRowListeners();
     limparFormulario();
   }
@@ -129,6 +139,7 @@ notificationIcon.addEventListener("click", (event) => {
     });
   }
 
+  /// LISTAR PRODUTOS ///
     document.getElementById('tabela').addEventListener('click', function() {
         document.getElementById('products-list').style.display = 'block'
         document.getElementById('dashboard-painel').style.display = 'none'
@@ -166,9 +177,11 @@ notificationIcon.addEventListener("click", (event) => {
         productStates[produto.codigo] = "normal";
       }
     }
-  }
+  } /// LISTAR PRODUTOS ///
 
+    /// FUNÇÕES DASHBOARD ///
     document.getElementById('dashboard').addEventListener('click', function() {
+        listarDashboard();
         document.getElementById('products-list').style.display = 'none'
         document.getElementById('dashboard-painel').style.display = 'block'
         document.getElementById('relatorio-list').style.display = 'none'
@@ -176,8 +189,41 @@ notificationIcon.addEventListener("click", (event) => {
         this.classList.add('active')
         document.getElementById('relatorio').classList.remove('active')
     })
+    /// LISTAR DASHBOARD ///
+    function listarDashboard() {
+      let totalEstoque = 0
+      let porcentagemAtiva = 0
+      let porcentagemRemovida = 0
+      estoque.forEach((produto) => {
+      totalEstoque += produto.quantidade
+      })
+      
+      document.querySelector('.quantidade-total-estoque h1 span').innerHTML = totalEstoque
+      document.querySelector('.produtos-cadastrados .cor-de-fundo h2').innerHTML = totalProduto
+      document.querySelector('.produtos-ativos .cor-de-fundo h2').innerHTML = produtosAtivos
+      document.querySelector('.produtos-removidos .cor-de-fundo h2').innerHTML = produtosRemovidos
 
-  // LISTAR TABELA DE RELATORIO
+      porcentagemAtiva = (produtosAtivos * 100 / totalProduto).toFixed(0)
+      porcentagemRemovida = (produtosRemovidos * 100 / totalProduto).toFixed(0)
+
+      if (isNaN(porcentagemAtiva) && isNaN(porcentagemRemovida)) {
+
+      } else if (isNaN(porcentagemRemovida)) {
+        document.querySelector('.produtos-ativos h1').innerHTML = porcentagemAtiva + '%'
+      } else if (isNaN(porcentagemAtiva)) {
+        document.querySelector('.produtos-removidos h1').innerHTML = porcentagemRemovida + '%'
+      } else {
+        document.querySelector('.produtos-ativos h1').innerHTML = porcentagemAtiva + '%'
+        document.querySelector('.produtos-removidos h1').innerHTML = porcentagemRemovida + '%'
+      }
+
+      document.querySelector('.produtos-ativos .cor-de-fundo').style.width = porcentagemAtiva + '%'
+      document.querySelector('.produtos-removidos .cor-de-fundo').style.width = porcentagemRemovida + '%'
+
+
+    }/// FUNÇÕES DASHBOARD ///
+
+  /// LISTAR TABELA DE RELATORIO ///
     document.getElementById('relatorio').addEventListener('click', function() {
         document.getElementById('products-list').style.display = 'none'
         document.getElementById('dashboard-painel').style.display = 'none'
@@ -186,6 +232,7 @@ notificationIcon.addEventListener("click", (event) => {
         document.getElementById('dashboard').classList.remove('active')
         this.classList.add('active')
     })
+    
     function listarRelatorio() {
         const tbody = document.querySelector('#relatorio-table tbody');
         tbody.innerHTML = '';
@@ -217,11 +264,14 @@ notificationIcon.addEventListener("click", (event) => {
     });
   
   function removerProduto(codigo) {
-    cadastrarRelatorio(estoque[codigo],'REMOVIDO')
-    delete estoque[codigo];
-    delete productStates[codigo];
-    listarProdutos();
-    listarRelatorio();
+    if (estoque[codigo] != null) {
+      cadastrarRelatorio(estoque[codigo],'REMOVIDO')
+      delete estoque[codigo];
+      delete productStates[codigo];
+      produtosAtivos -= 1
+      produtosRemovidos += 1
+      listarTodos()
+    }
   }
   
   function filtrarProdutos(query) {
@@ -276,17 +326,17 @@ document.addEventListener('DOMContentLoaded', (event) => {
             const custo = parseFloat(prompt("Novo Custo do Produto:", produto.custo));
             const preco = parseFloat(prompt("Novo Preço do Produto:", produto.preco));
             alterarProduto(codigo, nome, tipo, quantidade, custo, preco);
-            listarProdutos();
+            listarTodos()
             addRowListeners(); // Adiciona event listeners às novas linhas
         } else {
             alert("Produto não encontrado!");
         }
     });
+    
 
   document.getElementById("btnRemover").addEventListener("click", function () {
     const codigo = parseInt(prompt("Código do Produto a ser removido:"));
     removerProduto(codigo);
-    listarProdutos();
     addRowListeners();
   });
 
@@ -315,15 +365,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
             produto.custo = custo;
             produto.preco = preco;
         }
+        listarTodos()
     } // ALTERAR PRODUTO
 
-
-    
-
-    
-
     /// FILTRO E BARRA DE PESQUISA ///
-
 
     document.querySelectorAll('.filter-option').forEach(option => {
         option.addEventListener('click', function() {
@@ -340,7 +385,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     /// FILTRO E BARRA DE PESQUISA END ///
 
     addRowListeners(); // Inicializa event listeners para as linhas existentes (se houver)
-    listarProdutos();
+    listarTodos()
 
     
 });
