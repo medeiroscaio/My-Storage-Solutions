@@ -236,7 +236,7 @@ main {
   align-items: center;
   text-align: center;
   border-radius: 10px;
-  width: 30%;
+  width: 45%;
   border: #1f2844 2px solid;
   justify-content: start;
   & span {
@@ -274,7 +274,6 @@ main {
   background-color: #f0f0f0;
   color: #333;
   transition: background-color 0.3s, color 0.3s;
-  min-width: 175px;
 }
 
 .filtro.button:hover {
@@ -390,6 +389,7 @@ main {
 #produtos-painel .products-list table tbody tr {
   line-height: 50px;
   color: var(--color-white); /* Define a cor do texto como branca */
+  background-color: #1c2540;
 }
 
 .selected {
@@ -397,7 +397,6 @@ main {
 }
 
 #produtos-painel .products-list table tbody td {
-  background-color: #1c2540;
   color: var(--color-white); /* Define a cor do texto como branca */
 }
 
@@ -501,8 +500,11 @@ main {
     & span {
       padding: 0px 10px;
     }
-    & p {
+    & p , .filtro-texto {
       display: none;
+    }
+    & .filter-option{
+      display: block;
     }
   }
   #produtos-painel .buttons-section .button:hover {
