@@ -1,132 +1,123 @@
 @import url(general.css);
 
 #dashboard-painel {
-    
 }
 
 .quantidade-total-estoque {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 50px;
-    background-color: var(--color-light);
-    color: var(--color-dark);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
 }
 
 .graficos {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  max-width: 750px;
+  margin: 110px auto 130px;
+  gap: 10px;
+
+  & .padrao-graph {
     display: flex;
-    flex-direction: column;
-    width: 80%;
-    max-width: 750px;
-    margin: 110px auto 130px;
-    gap: 10px;
-
-    & .padrao-graph {
-        display: flex;
-        align-items: center;
-        height: 60px;
-        position: relative;
-        & h1 {
-            position: absolute;
-            left: -70px;
-            font-size: 20px;
-        }
-        & h2 {
-            font-size: 30px;
-            margin-right: 10px;
-        }
-        
+    align-items: center;
+    height: 40px;
+    position: relative;
+    & h1 {
+      position: absolute;
+      left: -70px;
+      font-size: 20px;
     }
-
+    & h2 {
+      font-size: 30px;
+      margin-right: 10px;
+    }
+  }
 }
 
 .cor-de-fundo {
-    transition: calc(1s);
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: right;
-    color: white;
-    width: 100%;
-    height: 100%;
-    min-width: 8px;
-    
+  transition: calc(1s);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  color: white;
+  width: 100%;
+  height: 100%;
+  min-width: 8px;
 }
 
 .produtos-cadastrados {
-    text-align: center;
-    & .cor-de-fundo {
-        background-color: blue;
-
-    }
+  text-align: center;
+  & .cor-de-fundo {
+    background-color: #598bde;
+  }
 }
 
 .produtos-ativos {
-    & .cor-de-fundo {
-        background-color: green;
-        
-    }
+  & .cor-de-fundo {
+    background-color: #78bf9c;
+  }
 }
 
 .produtos-removidos {
-    & .cor-de-fundo {
-        background-color: red;
-        
-    }
+  & .cor-de-fundo {
+    background-color: #e2a576;
+  }
 }
 
 .descricao {
-    margin: 0 20px;
-    display: flex;
-    justify-content: center;
-    gap: 70px;
-
+  margin: 0 20px;
+  display: flex;
+  justify-content: center;
+  gap: 70px;
 }
 
 .padrao-descricao {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 15px;
-    & .quadrado {
-        width: 25px;
-        height: 25px;
-    }
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 15px;
+  & .quadrado {
+    width: 25px;
+    height: 25px;
+  }
 }
 
 .descricao-produtos-cadastrados {
-    & .quadrado {
-        background-color: blue;
-    }
+  & .quadrado {
+    background-color: #598bde;
+    border-radius: 2px;
+  }
 }
 
 .descricao-produtos-ativos {
-    & .quadrado {
-        background-color: green;
-    }
+  & .quadrado {
+    background-color: #78bf9c;
+    border-radius: 2px;
+  }
 }
 
 .descricao-produtos-removidos {
-    & .quadrado {
-        background-color: red;
-    }
+  & .quadrado {
+    background-color: #e2a576;
+    border-radius: 2px;
+  }
 }
 
 @media (max-width: 1035px) {
-    .graficos {
-        & .padrao-graph {
-            position: relative;
-            & h1 {
-                position: absolute;
-                left: 10px;
-                font-size: 20px;
-                color: white;
-            }
-            & h2 {
-                margin-right: 10px;
-            }
-            
-        }
-
+  .graficos {
+    & .padrao-graph {
+      position: relative;
+      & h1 {
+        position: absolute;
+        left: 10px;
+        font-size: 20px;
+        color: white;
+      }
+      & h2 {
+        margin-right: 10px;
+      }
     }
+  }
 }

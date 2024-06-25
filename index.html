@@ -3,41 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-
     <link rel="stylesheet" href="styles/general.css">
     <link rel="stylesheet" href="styles/app.css">
     <link rel="stylesheet" href="styles/form.css">
     <link rel="stylesheet" href="styles/notification.css">
-
-
     <title>Document</title>
 </head>
 <body>
     <div class="container">
-        
         <div id="top-side">
-
             <div class="logo">
                 <div class="logo-contents">
                     <img src="sources/logo.png" alt="">
                     <h2>MY STORAGE <br> SOLUTIONS</h2>
                 </div>
             </div>
-
             <div class="profile">
                 <div class="contents">
                     <h2>Ola <span>Welder</span>, Bom-dia!</h2>
                     <div class="profile-photo">
                         <img src="sources/profile.png" alt="">
                     </div>
-
                 </div>
             </div> <!-- PROFILE -->
-
         </div> <!-- TOP-SIDE -->
-
         <main id="main">
             <section class="side-bar-container">
                 <div class="sidebar">
@@ -63,13 +53,11 @@
                             <ul id="notification-list"></ul>
                             <p id="no-notifications" class="hidden">Não há mensagens novas</p>
                         </div>
-                </div>
+                    </div>
                 </div>
             </section>
-
             <section id="produtos-painel">
                 <div class="buttons-section" id="buttons-section">
-                    
                     <button id="btnCadastrar" class="button success">
                         <span class="material-symbols-outlined">package_2</span>
                         <div class="mensagem">Cadastrar</div>
@@ -107,9 +95,8 @@
                         <div class="mensagem">Remover</div>
                         <p>Remover</p>
                     </div>
-
                     <div class="filtro button">
-                        <span class="filtro-texto">Filtro</span>
+                        <span class="filtro-texto">Filtros</span>
                         <span class="material-symbols-outlined">arrow_drop_down</span>
                         <div class="dropdown-content">
                             <p class="filter-option" data-filter="codigo">Código</p>
@@ -117,14 +104,11 @@
                             <p class="filter-option" data-filter="tipo">Tipo</p>
                         </div>
                     </div>
-                    
-                    
                     <div class="search-button">
                         <span class="material-symbols-outlined">search</span>
-                        <input type="text" placeholder="Pesquisar..." ><span class="material-symbols-outlined">
+                        <input type="text" placeholder="Pesquisar"><span class="material-symbols-outlined">
                     </div>
                 </div>
-
                 <div class="products-list" id="products-list">
                     <table id="produtosTable" class="grid-table">
                         <thead class="table-head">
@@ -134,62 +118,52 @@
                                 <th> <p>Tipo</p> </th>
                                 <th> <p>Estoque</p> </th>
                                 <th> <p>Custo</p></th>
-                                <th> <p>Preco</p></th>
+                                <th> <p>Preço</p></th>
                             </tr>
                         </thead>
                         <tbody class="table-body">
                         </tbody>
                     </table>
                 </div>
-
                 <div class="products-list" id="dashboard-painel">
                     <div class="quantidade-total-estoque">
                         <h1>Quantidade total no estoque: <span>0</span></h1>
                     </div>
                     <div class="graficos">
-
                         <div class="produtos-cadastrados padrao-graph">
                             <h1>100%</h1>
                             <div class="cor-de-fundo">
-                                <h2>0</h2>
+                                <h2></h2>
                             </div>
                         </div>
-
                         <div class="produtos-ativos padrao-graph">
                             <h1>100%</h1>
                             <div class="cor-de-fundo">
-                                <h2>0</h2>
+                                <h2></h2>
                             </div>
                         </div>
-
                         <div class="produtos-removidos padrao-graph">
                             <h1>100%</h1>
                             <div class="cor-de-fundo">
-                                <h2>0</h2>
+                                <h2></h2>
                             </div>
                         </div>
-
                     </div>
-
                     <div class="descricao">
                         <div class="descricao-produtos-cadastrados padrao-descricao">
-                            <div class="quadrado">
-                            </div>
+                            <div class="quadrado"></div>
                             <p>Produtos totais cadastrados</p>
                         </div>
                         <div class="descricao-produtos-ativos padrao-descricao">
-                            <div class="quadrado">
-                            </div>
+                            <div class="quadrado"></div>
                             <p>Produtos ativos</p>
                         </div>
                         <div class="descricao-produtos-removidos padrao-descricao">
-                            <div class="quadrado">
-                            </div>
+                            <div class="quadrado"></div>
                             <p>Produtos removidos</p>
                         </div>
                     </div>
                 </div>
-
                 <div class="products-list" id="relatorio-list">
                     <table id="relatorio-table" class="grid-table">
                         <thead class="relatorio-table-head table-head">
@@ -205,17 +179,12 @@
                         </tbody>
                     </table>
                 </div>
-
             </section>
         </main>
-        
     </div>
     <script type="module" src="scripts/app.js"></script>
     <script type="module" src="scripts/script.js"></script>
     <script type="module" src="scripts/form.js"></script>
-    <script
-      src="https://kit.fontawesome.com/49272a6f5a.js"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://kit.fontawesome.com/49272a6f5a.js" crossorigin="anonymous"></script>
 </body>
 </html>
