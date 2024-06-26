@@ -6,6 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const closePopupBtn = document.getElementById('closePopupBtn');
     const popupContent = document.querySelector('.popup-content');
     const successPopup = document.getElementById('successMessage');
+    const popupMessage = document.getElementById('popup-message');
+    const submitButton = document.getElementById('submitbutton');
     const okButton = document.getElementById('ok');
     const btnAlterar = document.getElementById('btnAlterar');
     const confirmPopup = document.getElementById('confirmMessage');
@@ -19,6 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
     successPopup.style.top = '-200px';
 
     openPopupBtn.addEventListener('click', () => {
+        isEditing = false; // Definir isEditing como false ao abrir para cadastro
+        submitButton.innerHTML = 'Cadastrar Produto'; // Definir o texto do botão
         openPopup();
     });
 
@@ -36,48 +40,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 isEditing = true;
                 editingProductCode = codigo;
+                submitButton.innerHTML = 'Alterar Produto'; // Definir o texto do botão
                 openPopup();
             }
         }
-    });
-
-    closePopupBtn.addEventListener('click', () => {
-        closePopup();
-    });
-
-    window.addEventListener('click', (event) => {
-        if (event.target === popup) {
-            closePopup();
-        }
-    });
-
-    const form = document.getElementById('productForm');
-    form.addEventListener('submit', (event) => {
-        event.preventDefault();
-
-        const nome = form.nome.value;
-        const tipo = form.tipo.value;
-        const quantidade = parseInt(form.quantidade.value);
-        const custo = parseFloat(form.custo.value);
-        const preco = parseFloat(form.preco.value);
-
-        if (isEditing && editingProductCode !== null) {
-            alterarProduto(editingProductCode, nome, tipo, quantidade, custo, preco);
-            isEditing = false;
-            editingProductCode = null;
-        } else {
-            cadastrarProduto(nome, tipo, quantidade, custo, preco);
-        }
-
-        popupContent.classList.add('closing');
-        setTimeout(() => {
-            popup.style.display = 'none';
-            popupContent.classList.remove('closing');
-        }, 200);
-        setTimeout(() => {
-            successPopup.style.opacity = '1';
-            successPopup.style.top = '50%';
-        }, 200);
     });
 
     document.getElementById("btnRemover").addEventListener("click", function () {
@@ -103,6 +69,47 @@ document.addEventListener('DOMContentLoaded', () => {
                 confirmPopup.style.top = '-200px';
             };
         }
+    });
+
+    closePopupBtn.addEventListener('click', () => {
+        closePopup();
+    });
+
+    window.addEventListener('click', (event) => {
+        if (event.target === popup) {
+            closePopup();
+        }
+    });
+
+    const form = document.getElementById('productForm');
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        const nome = form.nome.value;
+        const tipo = form.tipo.value;
+        const quantidade = parseInt(form.quantidade.value);
+        const custo = parseFloat(form.custo.value);
+        const preco = parseFloat(form.preco.value);
+
+        if (isEditing && editingProductCode !== null) {
+            alterarProduto(editingProductCode, nome, tipo, quantidade, custo, preco);
+            popupMessage.innerHTML = 'Produto foi alterado com sucesso!';
+            isEditing = false;
+            editingProductCode = null;
+        } else {
+            cadastrarProduto(nome, tipo, quantidade, custo, preco);
+            popupMessage.innerHTML = 'Produto foi cadastrado com sucesso!';
+        }
+
+        popupContent.classList.add('closing');
+        setTimeout(() => {
+            popup.style.display = 'none';
+            popupContent.classList.remove('closing');
+        }, 200);
+        setTimeout(() => {
+            successPopup.style.opacity = '1';
+            successPopup.style.top = '50%';
+        }, 200);
     });
 
     okButton.addEventListener('click', () => {

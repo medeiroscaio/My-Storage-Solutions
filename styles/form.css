@@ -179,3 +179,7 @@ form button:hover {
 #confirmMessage {
     display: none;
 }
+
+#changedMessage {
+    display: none;
+}
