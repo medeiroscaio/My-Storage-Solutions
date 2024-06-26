@@ -150,6 +150,8 @@ function addRowListeners() {
       }
     });
   });
+  btnAlterar.disabled = true;
+  btnRemover.disabled = true;
 }
 
 /// LISTAR PRODUTOS ///
@@ -305,6 +307,7 @@ function removerProduto(codigo) {
     produtosAtivos -= 1;
     produtosRemovidos += 1;
     listarTodos();
+    addRowListeners();
   }
 }
 
@@ -351,26 +354,24 @@ function filtrarProdutos(query) {
 
 document.addEventListener("DOMContentLoaded", (event) => {
   document.getElementById("btnAlterar").addEventListener("click", function () {
-    const codigo = parseInt(prompt("Código do Produto a ser alterado:"));
+    const selectedRow = document.querySelector(".table-body tr.selected");
+    const codigo = parseInt(selectedRow.querySelector(".produto-codigo").textContent.trim());
     const produto = estoque[codigo];
-    if (produto) {
-      const nome = prompt("Novo Nome do Produto:", produto.nome);
-      const tipo = prompt("Novo Tipo do Produto:", produto.tipo);
-      const quantidade = parseInt(
-        prompt("Nova Quantidade do Produto:", produto.quantidade)
-      );
-      const custo = parseFloat(prompt("Novo Custo do Produto:", produto.custo));
-      const preco = parseFloat(prompt("Novo Preço do Produto:", produto.preco));
-      alterarProduto(codigo, nome, tipo, quantidade, custo, preco);
-      listarTodos();
-      addRowListeners(); // Adiciona event listeners às novas linhas
-    } else {
-      alert("Produto não encontrado!");
-    }
+    const nome = prompt("Novo Nome do Produto:", produto.nome);
+    const tipo = prompt("Novo Tipo do Produto:", produto.tipo);
+    const quantidade = parseInt(
+      prompt("Nova Quantidade do Produto:", produto.quantidade)
+    );
+    const custo = parseFloat(prompt("Novo Custo do Produto:", produto.custo));
+    const preco = parseFloat(prompt("Novo Preço do Produto:", produto.preco));
+    alterarProduto(codigo, nome, tipo, quantidade, custo, preco);
+    listarTodos();
+    addRowListeners();
   });
 
   document.getElementById("btnRemover").addEventListener("click", function () {
-    const codigo = parseInt(prompt("Código do Produto a ser removido:"));
+    const selectedRow = document.querySelector(".table-body tr.selected");
+    const codigo = parseInt(selectedRow.querySelector(".produto-codigo").textContent.trim());
     removerProduto(codigo);
     addRowListeners();
   });
@@ -401,6 +402,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
       produto.preco = preco;
     }
     listarTodos();
+    addRowListeners();
   } // ALTERAR PRODUTO
 
   /// FILTRO E BARRA DE PESQUISA ///

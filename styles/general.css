@@ -12,6 +12,8 @@
   --color-light: rgba(48, 126, 235, 0.288);
   --color-dark-variant: #677483;
   --color-background: #f6f6f9;
+  --color-green: #78bf9c;
+  --color-yellow: #e2a576;
 
   --box-shadow: 0 1rem 2rem var(--color-light);
 }

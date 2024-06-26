@@ -16,6 +16,9 @@
   --color-dark-variant: #677483;
   --color-background: #f6f6f9;
   --color-text: #9599a7;
+  --color-green: #78bf9c;
+  --color-yellow: #e2a576;
+
   --box-shadow: 0 1rem 2rem var(--color-light);
 }
 
@@ -106,7 +109,7 @@ main {
   flex-direction: column;
   height: 100%;
   position: relative;
-  border-bottom-left-radius: 2rem;
+  background-color: #f9f9f9;
 }
 
 .side-bar-container h3 {
@@ -186,8 +189,8 @@ main {
   font-size: 1.6rem;
   font-weight: 600;
   padding: 5px 10px;
-  color: var(--color-light);
-  background-color: inherit;
+  color: var(--color-info-light);
+  background-color: #1f2844;
   border-radius: 10px;
   border: solid 2px #1f2844;
   align-items: center;
@@ -198,7 +201,7 @@ main {
     display: none;
   }
   & p {
-    color: var(--color-text);
+    color: var(--color-info-light);
   }
 }
 
@@ -207,11 +210,15 @@ main {
 }
 
 #produtos-painel .buttons-section .success {
-  background-color: inherit;
-  color: var(--color-text);
+  background-color: #1f2844;
+  color: var(--color-info-light);
   cursor: pointer;
   & p {
-    color: var(--color-text);
+    color: var(--color-info-light);
+    transition: 200ms ease all;
+  }
+  & span {
+    color: var(--color-info-light);
   }
 }
 
@@ -219,16 +226,37 @@ main {
   padding: 20px 20px;
 }
 
-#produtos-painel .buttons-section .button span {
+#produtos-painel .buttons-section .button span{
   font-size: 2.3rem;
-  transition: transform 0.5s;
-  color: var(--color-text);
+  transition: 200ms ease all, transform 0.5s;
+}
+
+#produtos-painel .buttons-section .button p{
+  transition: 200ms ease all, transform 0.5s;
 }
 
 #btnAlterar:hover {
+  & p {
+    color: #598bde /* sexo */ !important;
+  }
   & span.alterar {
     transform: rotate(180deg);
+    color: #598bde !important;
   }
+}
+
+#btnRemover:hover {
+  & p {
+    color: var(--color-danger) !important;
+  }
+  & span {
+    color: var(--color-danger) !important;
+  }
+}
+
+#produtos-painel .buttons-section .success:hover p,
+#produtos-painel .buttons-section .success:hover span {
+  color: #78bf9c;
 }
 
 #produtos-painel .buttons-section .search-button {
@@ -295,27 +323,27 @@ main {
 .filtro.button .dropdown-content {
   display: none;
   position: absolute;
-  background-color: #161f3b; /* Define background sólido */
-  min-width: 100%; /* Ajusta a largura mínima para 100% do botão */
+  background-color: #161f3b;
+  min-width: 100%;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   top: 100%;
   left: 0;
-  z-index: 10; /* Certifica-se que o dropdown fica sobre outros elementos */
+  z-index: 10;
 }
 
 .dropdown-content p {
   font-size: 22.4px !important;
-  color: var(--color-white); /* Ajusta a cor do texto */
+  color: var(--color-white);
   padding: 12px 16px;
   text-decoration: none;
   display: block;
   cursor: pointer;
-  background-color: #161f3b; /* Garante que cada item tenha um fundo sólido */
+  background-color: #161f3b;
 }
 
 .dropdown-content p:hover {
-  background-color: #f1f1f1; /* Cor de fundo ao passar o mouse */
-  color: var(--color-dark); /* Mantém a cor do texto ao passar o mouse */
+  background-color: #f1f1f1;
+  color: var(--color-dark);
 }
 
 .filtro.button:hover .dropdown-content {
@@ -362,8 +390,8 @@ main {
 
   border-collapse: collapse;
   position: relative;
-  font-family: "Lato", sans-serif; /* Aplica a fonte Lato à tabela */
-  color: var(--color-white); /* Define a cor do texto como branca */
+  font-family: "Lato", sans-serif;
+  color: var(--color-white);
   & .entradas {
     width: 70px;
   }
@@ -373,6 +401,8 @@ main {
   position: sticky;
   top: 0;
   height: 60px;
+  z-index: 999;
+  background-color: #242e4c;
 }
 
 .table-head th p {
@@ -380,20 +410,20 @@ main {
   width: fit-content;
   color: inherit;
   cursor: pointer;
-  font-family: "Lato", sans-serif; /* Aplica a fonte Lato aos cabeçalhos */
+  font-family: "Lato", sans-serif;
   font-weight: 500;
   font-style: normal;
-  color: var(--color-white); /* Define a cor do texto como branca */
+  color: var(--color-white); 
   font-size: 20px;
 }
 
 .table-body {
-  color: var(--color-white); /* Define a cor do texto como branca */
+  color: var(--color-white); 
 }
 
 #produtos-painel .products-list table tbody tr {
   line-height: 50px;
-  color: var(--color-white); /* Define a cor do texto como branca */
+  color: var(--color-white); 
   background-color: #1c2540;
 }
 
@@ -402,7 +432,7 @@ main {
 }
 
 #produtos-painel .products-list table tbody td {
-  color: var(--color-white); /* Define a cor do texto como branca */
+  color: var(--color-white); 
 }
 
 #produtos-painel .products-list table tbody tr:last-child td {
@@ -411,7 +441,7 @@ main {
 
 #produtos-painel .products-list table tbody .money {
   font-style: italic;
-  color: var(--color-white); /* Define a cor do texto como branca */
+  color: var(--color-white); 
 }
 
 #produtos-painel .products-list table tbody tr:hover td {
@@ -428,7 +458,7 @@ main {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: var(--color-white); /* Garante que a cor do texto seja branca */
+    color: var(--color-white);
   }
 }
 
@@ -475,21 +505,21 @@ main {
 
 .table-body tr {
   position: relative;
-  color: var(--color-white); /* Define a cor do texto como branca */
+  color: var(--color-white);
 }
 
 .table-body tr p {
-  color: var(--color-white); /* Define a cor do texto como branca */
+  color: var(--color-white);
 }
 
 .table-body tr.selected p {
   color: var(
     --color-white
-  ) !important; /* Garante que a cor do texto seja branca para a linha selecionada */
+  ) !important;
 }
 
 .info-product {
-  color: var(--color-white); /* Define a cor do texto como branca */
+  color: var(--color-white);
 }
 /* ------------------ TABELA END -------------------- */
 
