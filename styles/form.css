@@ -49,7 +49,7 @@
     cursor: pointer;
     color: #aaa;
     transition: color 0.3s;
-    z-index: 2;
+    z-index: 999;
 }
 
 .close:hover {

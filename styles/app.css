@@ -224,6 +224,7 @@ main {
 
 #produtos-painel .buttons-section .filtro {
   padding: 20px 20px;
+  min-width: 162px;
 }
 
 #produtos-painel .buttons-section .button span{
@@ -317,7 +318,7 @@ main {
 .filtro.button .filtro-texto {
   margin-right: 8px;
   font-size: 22.4px !important;
-  color: var(--color-text);
+  color: var(--color-info-light);
 }
 
 .filtro.button .dropdown-content {
@@ -343,7 +344,7 @@ main {
 
 .dropdown-content p:hover {
   background-color: #f1f1f1;
-  color: var(--color-dark);
+  color: #1f2844 !important;
 }
 
 .filtro.button:hover .dropdown-content {
@@ -541,6 +542,9 @@ main {
     & .filter-option{
       display: block;
     }
+  }
+  #produtos-painel .buttons-section .filtro {
+    min-width: 0;
   }
   #produtos-painel .buttons-section .button:hover {
     .mensagem {
