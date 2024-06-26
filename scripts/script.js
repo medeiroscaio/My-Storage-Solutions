@@ -382,9 +382,8 @@ function filtrarProdutos(query) {
 }
 
 document.addEventListener("DOMContentLoaded", (event) => {
-
   addRowListeners();
   listarTodos();
 });
 
-export { cadastrarProduto, alterarProduto, removerProduto, estoque};
+export { cadastrarProduto, alterarProduto, removerProduto, estoque };

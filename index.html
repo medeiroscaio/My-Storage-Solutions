@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="styles/app.css">
     <link rel="stylesheet" href="styles/form.css">
     <link rel="stylesheet" href="styles/notification.css">
-    <title>Document</title>
+    <title>My Storage Solutions</title>
 </head>
 <body>
     <div class="container">
@@ -90,10 +90,12 @@
                         <p id="popup-message"></p>
                         <button id="ok">OK</button>
                     </div>
-                    <div class="message" id="confirmMessage">
+                    <div class="message-remove" id="confirmMessage">
                         <p>Tem certeza que deseja remover o produto?</p>
-                        <button id="confirmBtn">Confirmar</button>
-                        <button id="cancelBtn">Cancelar</button>
+                        <div class="confirm-buttons">
+                            <button id="confirmBtn">Confirmar</button>
+                            <button id="cancelBtn">Cancelar</button>
+                        </div>
                     </div>                    
                     <button id="btnRemover" class="button" disabled>
                         <span class="material-symbols-outlined">delete</span>
@@ -190,6 +192,7 @@
     <script type="module" src="scripts/app.js"></script>
     <script type="module" src="scripts/script.js"></script>
     <script type="module" src="scripts/form.js"></script>
+    <script src="scripts/notification.js"></script>
     <script src="https://kit.fontawesome.com/49272a6f5a.js" crossorigin="anonymous"></script>
 </body>
 </html>

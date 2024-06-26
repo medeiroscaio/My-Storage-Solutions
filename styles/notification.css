@@ -32,10 +32,60 @@ body {
 .notification-popup ul li {
   padding: 10px;
   border-bottom: 1px solid #ccc;
+  transition: 0.5s;
+  cursor: pointer;
 }
 
 .notification-popup ul li:last-child {
   border-bottom: none;
+}
+
+.notification-popup ul li.alert-simple.alert-success {
+  border: 1px solid rgba(36, 241, 6, 0.46);
+  background-color: rgba(7, 149, 66, 0.12156862745098039);
+  box-shadow: 0px 0px 2px #259c08;
+  color: #0ad406;
+  text-shadow: 2px 1px #00040a;
+}
+
+.notification-popup ul li.alert-success:hover {
+  background-color: rgba(7, 149, 66, 0.35);
+}
+
+.notification-popup ul li.alert-simple.alert-info {
+  border: 1px solid rgba(6, 44, 241, 0.46);
+  background-color: rgba(7, 73, 149, 0.12156862745098039);
+  box-shadow: 0px 0px 2px #0396ff;
+  color: #0396ff;
+  text-shadow: 2px 1px #00040a;
+}
+
+.notification-popup ul li.alert-info:hover {
+  background-color: rgba(7, 73, 149, 0.35);
+}
+
+.notification-popup ul li.alert-simple.alert-warning {
+  border: 1px solid rgba(241, 142, 6, 0.81);
+  background-color: rgba(220, 128, 1, 0.16);
+  box-shadow: 0px 0px 2px #ffb103;
+  color: #ffb103;
+  text-shadow: 2px 1px #00040a;
+}
+
+.notification-popup ul li.alert-warning:hover {
+  background-color: rgba(220, 128, 1, 0.33);
+}
+
+.notification-popup ul li.alert-simple.alert-danger {
+  border: 1px solid rgba(241, 6, 6, 0.81);
+  background-color: rgba(220, 17, 1, 0.16);
+  box-shadow: 0px 0px 2px #ff0303;
+  color: #ff0303;
+  text-shadow: 2px 1px #00040a;
+}
+
+.notification-popup ul li.alert-danger:hover {
+  background-color: rgba(220, 17, 1, 0.33);
 }
 
 .message-count {
@@ -58,6 +108,33 @@ body {
   text-align: center;
   color: #999;
 }
+
+.greencross {
+  font-size: 18px;
+  color: #25ff0b;
+  text-shadow: none;
+}
+
+.blue-cross {
+  font-size: 18px;
+  color: #0bd2ff;
+  text-shadow: none;
+}
+
 .warning {
-  color: red;
+  font-size: 18px;
+  color: #ffb40b;
+  text-shadow: none;
+}
+
+.danger {
+  font-size: 18px;
+  color: #ff0303;
+  text-shadow: none;
+}
+
+.alertprimary {
+  font-size: 18px;
+  color: #03d0ff;
+  text-shadow: none;
 }
