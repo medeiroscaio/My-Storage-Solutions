@@ -260,6 +260,11 @@ main {
   cursor: pointer;
 }
 
+.button[disabled] {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
 .buttons-section .button.selected-row:hover {
   transform: scale(1.03);
 }

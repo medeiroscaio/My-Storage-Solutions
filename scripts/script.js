@@ -132,15 +132,21 @@ function cadastrarRelatorio(produto, destino) {
 function addRowListeners() {
   const rows = document.querySelectorAll(".table-body tr");
   const buttons = document.querySelectorAll(".buttons-section .button");
+  const btnAlterar = document.getElementById("btnAlterar");
+  const btnRemover = document.getElementById("btnRemover");
   rows.forEach((row) => {
     row.addEventListener("click", () => {
       if (row.classList.contains("selected")) {
         row.classList.remove("selected");
         buttons.forEach((button) => button.classList.remove("selected-row"));
+        btnAlterar.disabled = true;
+        btnRemover.disabled = true;
       } else {
         rows.forEach((r) => r.classList.remove("selected"));
         row.classList.add("selected");
         buttons.forEach((button) => button.classList.add("selected-row"));
+        btnAlterar.disabled = false;
+        btnRemover.disabled = false;
       }
     });
   });
@@ -288,6 +294,7 @@ document
   .addEventListener("input", function () {
     const query = this.value.trim().toLowerCase();
     filtrarProdutos(query);
+    addRowListeners();
   });
 
 function removerProduto(codigo) {
@@ -405,13 +412,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
         this.textContent;
     });
   });
-
-  document
-    .querySelector(".search-button input")
-    .addEventListener("input", function () {
-      const query = this.value.trim().toLowerCase();
-      filtrarProdutos(query);
-    });
 
   /// FILTRO E BARRA DE PESQUISA END ///
 
