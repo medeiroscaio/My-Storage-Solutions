@@ -21,8 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
     successPopup.style.top = '-200px';
 
     openPopupBtn.addEventListener('click', () => {
-        isEditing = false; // Definir isEditing como false ao abrir para cadastro
-        submitButton.innerHTML = 'Cadastrar Produto'; // Definir o texto do botão
+        isEditing = false;
+        submitButton.innerHTML = 'Cadastrar Produto'; 
         openPopup();
     });
 
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 isEditing = true;
                 editingProductCode = codigo;
-                submitButton.innerHTML = 'Alterar Produto'; // Definir o texto do botão
+                submitButton.innerHTML = 'Alterar Produto'; 
                 openPopup();
             }
         }
