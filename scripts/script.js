@@ -121,6 +121,35 @@ function cadastrarProduto(nome, tipo, quantidade, custo, preco) {
   limparFormulario();
 }
 
+function alterarProduto(codigo, nome, tipo, quantidade, custo, preco) {
+  const produto = estoque[codigo];
+  if (produto) {
+    const wasLowStock = produto.quantidade <= lowStockLimit;
+    produto.nome = nome;
+    produto.tipo = tipo;
+    produto.quantidade = quantidade;
+
+    if (wasLowStock && produto.quantidade > lowStockLimit) {
+      const notification = `<p><i class="fa-solid fa-check-circle success"></i> Produto ${produto.codigo} teve seu estoque corrigido para ${produto.quantidade} unidades!</p>`;
+      if (productStates[produto.codigo] !== "normal") {
+        addNotification(notification, produto.codigo, "normal");
+      }
+    } else if (produto.quantidade <= lowStockLimit) {
+      const notification = `<p><i class="fa-solid fa-triangle-exclamation warning"></i> Produto ${produto.codigo} está com estoque baixo!</p>`;
+      if (productStates[produto.codigo] !== "lowStock") {
+        addNotification(notification, produto.codigo, "lowStock");
+      }
+    } else {
+      productStates[produto.codigo] = "normal";
+    }
+
+    produto.custo = custo;
+    produto.preco = preco;
+  }
+  listarTodos();
+  addRowListeners();
+}
+
 //CADASTRAR RELATORIO
 let posicao = 0;
 function cadastrarRelatorio(produto, destino) {
@@ -353,72 +382,9 @@ function filtrarProdutos(query) {
 }
 
 document.addEventListener("DOMContentLoaded", (event) => {
-  document.getElementById("btnAlterar").addEventListener("click", function () {
-    const selectedRow = document.querySelector(".table-body tr.selected");
-    const codigo = parseInt(selectedRow.querySelector(".produto-codigo").textContent.trim());
-    const produto = estoque[codigo];
-    const nome = prompt("Novo Nome do Produto:", produto.nome);
-    const tipo = prompt("Novo Tipo do Produto:", produto.tipo);
-    const quantidade = parseInt(
-      prompt("Nova Quantidade do Produto:", produto.quantidade)
-    );
-    const custo = parseFloat(prompt("Novo Custo do Produto:", produto.custo));
-    const preco = parseFloat(prompt("Novo Preço do Produto:", produto.preco));
-    alterarProduto(codigo, nome, tipo, quantidade, custo, preco);
-    listarTodos();
-    addRowListeners();
-  });
 
-  document.getElementById("btnRemover").addEventListener("click", function () {
-    const selectedRow = document.querySelector(".table-body tr.selected");
-    const codigo = parseInt(selectedRow.querySelector(".produto-codigo").textContent.trim());
-    removerProduto(codigo);
-    addRowListeners();
-  });
-
-  function alterarProduto(codigo, nome, tipo, quantidade, custo, preco) {
-    const produto = estoque[codigo];
-    if (produto) {
-      const wasLowStock = produto.quantidade <= lowStockLimit;
-      produto.nome = nome;
-      produto.tipo = tipo;
-      produto.quantidade = quantidade;
-
-      if (wasLowStock && produto.quantidade > lowStockLimit) {
-        const notification = `<p><i class="fa-solid fa-check-circle success"></i> Produto ${produto.codigo} teve seu estoque corrigido para ${produto.quantidade} unidades!</p>`;
-        if (productStates[produto.codigo] !== "normal") {
-          addNotification(notification, produto.codigo, "normal");
-        }
-      } else if (produto.quantidade <= lowStockLimit) {
-        const notification = `<p><i class="fa-solid fa-triangle-exclamation warning"></i> Produto ${produto.codigo} está com estoque baixo!</p>`;
-        if (productStates[produto.codigo] !== "lowStock") {
-          addNotification(notification, produto.codigo, "lowStock");
-        }
-      } else {
-        productStates[produto.codigo] = "normal";
-      }
-
-      produto.custo = custo;
-      produto.preco = preco;
-    }
-    listarTodos();
-    addRowListeners();
-  } // ALTERAR PRODUTO
-
-  /// FILTRO E BARRA DE PESQUISA ///
-
-  document.querySelectorAll(".filter-option").forEach((option) => {
-    option.addEventListener("click", function () {
-      filtroSelecionado = this.getAttribute("data-filter");
-      document.querySelector(".filtro.button span:first-child").textContent =
-        this.textContent;
-    });
-  });
-
-  /// FILTRO E BARRA DE PESQUISA END ///
-
-  addRowListeners(); // Inicializa event listeners para as linhas existentes (se houver)
+  addRowListeners();
   listarTodos();
 });
 
-export { cadastrarProduto };
+export { cadastrarProduto, alterarProduto, removerProduto, estoque};

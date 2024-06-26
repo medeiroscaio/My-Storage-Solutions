@@ -63,6 +63,11 @@
                         <div class="mensagem">Cadastrar</div>
                         <p>Cadastrar</p>
                     </button>
+                    <button id="btnAlterar" class="button" disabled>
+                        <span class="material-symbols-outlined alterar">cached</span>
+                        <div class="mensagem">Alterar</div>
+                        <p>Alterar</p>
+                    </button>
                     <div id="popup" class="popup">
                         <div class="popup-content">
                             <span class="close-btn close" id="closePopupBtn">&times;</span>
@@ -85,11 +90,11 @@
                         <p>Produto cadastrado com sucesso!</p>
                         <button id="ok">OK</button>
                     </div>
-                    <button id="btnAlterar" class="button" disabled>
-                        <span class="material-symbols-outlined alterar">cached</span>
-                        <div class="mensagem">Alterar</div>
-                        <p>Alterar</p>
-                    </button>
+                    <div class="message" id="confirmMessage">
+                        <p>Tem certeza que deseja remover o produto?</p>
+                        <button id="confirmBtn">Confirmar</button>
+                        <button id="cancelBtn">Cancelar</button>
+                    </div>                    
                     <button id="btnRemover" class="button" disabled>
                         <span class="material-symbols-outlined">delete</span>
                         <div class="mensagem">Remover</div>

@@ -312,7 +312,7 @@ main {
 
 .filtro.button:hover {
   background-color: #e0e0e0;
-  z-index: 1000;
+  z-index: 2;
 }
 
 .filtro.button .filtro-texto {
@@ -329,7 +329,7 @@ main {
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   top: 100%;
   left: 0;
-  z-index: 10;
+  z-index: 2;
 }
 
 .dropdown-content p {
@@ -402,7 +402,7 @@ main {
   position: sticky;
   top: 0;
   height: 60px;
-  z-index: 2;
+  z-index: 1;
   background-color: #242e4c;
 }
 

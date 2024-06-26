@@ -1,4 +1,4 @@
-import { cadastrarProduto} from './script.js';
+import { cadastrarProduto, alterarProduto, removerProduto, estoque } from './script.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     const openPopupBtn = document.getElementById('btnCadastrar');
@@ -7,13 +7,38 @@ document.addEventListener('DOMContentLoaded', () => {
     const popupContent = document.querySelector('.popup-content');
     const successPopup = document.getElementById('successMessage');
     const okButton = document.getElementById('ok');
+    const btnAlterar = document.getElementById('btnAlterar');
+    const confirmPopup = document.getElementById('confirmMessage');
+    const confirmBtn = document.getElementById('confirmBtn');
+    const cancelBtn = document.getElementById('cancelBtn');
+
+    let isEditing = false;
+    let editingProductCode = null;
 
     successPopup.style.opacity = '0';
     successPopup.style.top = '-200px';
 
     openPopupBtn.addEventListener('click', () => {
-        popup.style.display = 'flex';
-        popupContent.classList.remove('closing');
+        openPopup();
+    });
+
+    btnAlterar.addEventListener('click', () => {
+        const selectedRow = document.querySelector('.table-body tr.selected');
+        if (selectedRow) {
+            const codigo = parseInt(selectedRow.querySelector('.produto-codigo').textContent.trim());
+            const produto = estoque[codigo];
+            if (produto) {
+                form.nome.value = produto.nome;
+                form.tipo.value = produto.tipo;
+                form.quantidade.value = produto.quantidade;
+                form.custo.value = produto.custo;
+                form.preco.value = produto.preco;
+
+                isEditing = true;
+                editingProductCode = codigo;
+                openPopup();
+            }
+        }
     });
 
     closePopupBtn.addEventListener('click', () => {
@@ -36,34 +61,68 @@ document.addEventListener('DOMContentLoaded', () => {
         const custo = parseFloat(form.custo.value);
         const preco = parseFloat(form.preco.value);
 
-        cadastrarProduto(nome, tipo, quantidade, custo, preco);
-        
+        if (isEditing && editingProductCode !== null) {
+            alterarProduto(editingProductCode, nome, tipo, quantidade, custo, preco);
+            isEditing = false;
+            editingProductCode = null;
+        } else {
+            cadastrarProduto(nome, tipo, quantidade, custo, preco);
+        }
+
         popupContent.classList.add('closing');
         setTimeout(() => {
             popup.style.display = 'none';
             popupContent.classList.remove('closing');
-        }, 300);
+        }, 200);
         setTimeout(() => {
             successPopup.style.opacity = '1';
             successPopup.style.top = '50%';
-        }, 1000);
+        }, 200);
+    });
+
+    document.getElementById("btnRemover").addEventListener("click", function () {
+        const selectedRow = document.querySelector(".table-body tr.selected");
+        if (selectedRow) {
+            setTimeout(() => {
+                confirmPopup.style.display = 'flex';
+                confirmPopup.style.opacity = '1';
+                confirmPopup.style.top = '50%';
+            }, 200);
+            const codigo = parseInt(selectedRow.querySelector('.produto-codigo').textContent.trim());
+            confirmBtn.onclick = function () {
+                removerProduto(codigo);
+                confirmPopup.style.display = 'none';
+                confirmPopup.style.opacity = '0';
+                confirmPopup.style.top = '-200px';
+                addRowListeners();
+            };
+
+            cancelBtn.onclick = function () {
+                confirmPopup.style.display = 'none';
+                confirmPopup.style.opacity = '0';
+                confirmPopup.style.top = '-200px';
+            };
+        }
     });
 
     okButton.addEventListener('click', () => {
         successPopup.classList.add('closing');
-        setTimeout(() => {
-            successPopup.style.opacity = '0';
-            successPopup.style.top = '-200px';
-            successPopup.classList.remove('closing');
-        }, 300);
+        successPopup.style.opacity = '0';
+        successPopup.style.top = '-200px';
+        successPopup.classList.remove('closing');
     });
 
     function closePopup() {
         popupContent.classList.add('closing');
-        setTimeout(() => {
-            popup.style.display = 'none';
-            popupContent.classList.remove('closing');
-        }, 300);
+        popup.style.display = 'none';
+        popupContent.classList.remove('closing');
+        form.reset();
+        isEditing = false;
+        editingProductCode = null;
     }
-    
+
+    function openPopup() {
+        popup.style.display = 'flex';
+        popupContent.classList.remove('closing');
+    }
 });
